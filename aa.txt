@@ -1,0 +1,51 @@
+-- Пример создания таблицы для футболистов
+CREATE TABLE FootballPlayers (
+    PlayerId INT PRIMARY KEY IDENTITY(1,1),
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    Gender NVARCHAR(10),
+    BirthDate DATE,
+    TeamName NVARCHAR(50),
+    Country NVARCHAR(50)
+);
+
+-- Пример создания таблицы для команд
+CREATE TABLE Teams (
+    TeamId INT PRIMARY KEY IDENTITY(1,1),
+    TeamName NVARCHAR(50) NOT NULL
+);
+-- Пример добавления стран
+INSERT INTO Teams (TeamName) VALUES ('Estonia'), ('USA'), ('Italy');
+
+--json: 
+"ConnectionStrings": {
+    "DefaultConnection": "Server=<server_name>;Database=<database_name>;Trusted_Connection=True;"
+}
+--Создайте модели FootballPlayer и Team, отражающие структуру таблиц в базе данных.
+public class FootballPlayer
+{
+    public int PlayerId { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Gender { get; set; }
+    public DateTime? BirthDate { get; set; }
+    public string TeamName { get; set; }
+    public string Country { get; set; }
+}
+
+public class Team
+{
+    public int TeamId { get; set; }
+    public string TeamName { get; set; }
+}
+--Создайте класс контекста данных, который настроит взаимодействие с базой данных.
+public class ApplicationDbContext : DbContext
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    {
+    }
+
+    public DbSet<FootballPlayer> FootballPlayers { get; set; }
+    public DbSet<Team> Teams { get; set; }
+}
+--Создайте контроллеры и представления для первой и второй страниц вашего Web-приложения.
