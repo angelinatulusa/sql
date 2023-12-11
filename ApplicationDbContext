@@ -13,7 +13,12 @@ namespace YourAppName.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Дополнительные настройки модели, если необходимо
+            // Определение первичного ключа для FootballPlayer
+            modelBuilder.Entity<FootballPlayer>().HasKey(fp => fp.PlayerId);
+
+            // Ваши другие настройки модели, если есть
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 
