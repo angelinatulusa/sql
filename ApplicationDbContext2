@@ -1,0 +1,41 @@
+using Microsoft.EntityFrameworkCore;
+
+namespace YourAppName.Models
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+        }
+
+        public DbSet<FootballPlayer> FootballPlayers { get; set; }
+        public DbSet<Team> Teams { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Определение первичного ключа для FootballPlayer
+            modelBuilder.Entity<FootballPlayer>().HasKey(fp => fp.PlayerId);
+
+            // Ваши другие настройки модели, если есть
+
+            base.OnModelCreating(modelBuilder);
+        }
+    }
+
+    public class FootballPlayer
+    {
+        public int PlayerId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Gender { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public string TeamName { get; set; }
+        public string Country { get; set; }
+    }
+
+    public class Team
+    {
+        public int TeamId { get; set; }
+        public string TeamName { get; set; }
+    }
+}
