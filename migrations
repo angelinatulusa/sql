@@ -1,0 +1,8 @@
+--Создание миграции для футболистов и команд:
+Add-Migration InitialCreate
+--Применение миграции:
+Update-Database
+--Создание миграции для фиксированного списка стран:
+Add-Migration AddCountries
+--Применение миграции:
+Update-Database
